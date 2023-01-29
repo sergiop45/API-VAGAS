@@ -3,6 +3,16 @@ const ModelVaga = require('../src/app/model/modelVaga');
 
 //POST
 
+/*
+{
+    "title": "teste update",
+    "description": "com 6 meses de experiencia, salario a combinar",
+    "email": "newempresa@gmail.com",
+    "fone": "41 3677-1421",
+    "city": "Curitiba"
+}
+*/
+
 route.post('/vaga', async (req, res) => {
 
     const vaga = req.body;

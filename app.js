@@ -1,8 +1,12 @@
 const express = require('express');
 const  app = express();
 const port = 4000;
-const route = require('./routes/Vagas');
+const VagaController = require('./routes/Vagas');
+const UserController = require('./routes/Usuarios');
+const LoginController = require('./routes/Login');
 const conn = require('./src/database/connection');
+const jwt = require('jsonwebtoken');
+require('dotenv-safe').config();
 
 app.use(express.urlencoded({
     extended: true
@@ -13,7 +17,9 @@ conn();
 
 //ROTAS
 
-app.use('/api/', route);
+app.use('/api/', VagaController);
+app.use('/api/', UserController);
+app.use('/api/', LoginController);
 
 app.get('/', (req, res) => {
 
