@@ -1,6 +1,7 @@
 const route = require('express').Router();
 const User = require('../src/app/model/modelUsuarios');
 const bcrypt = require('bcrypt');
+const VerifyJwt = require('./VerifyJwt');
 
 //POST
 
@@ -10,7 +11,7 @@ route.post('/user', async (req, res) => {
     const password = await bcrypt.hashSync(req.body.password, 10);
 
     const userCrypt = {user, password};
-    console.log(userCrypt)
+   
     try {
 
         const response = await User.create(userCrypt)
@@ -26,7 +27,7 @@ route.post('/user', async (req, res) => {
 
 //GET ALL
 
-route.get('/user', async(req, res) => {
+route.get('/user', VerifyJwt , async(req, res) => {
 
     try {
         
@@ -35,6 +36,8 @@ route.get('/user', async(req, res) => {
 
     } catch (error) {
         
+        res.status(500).json({message: 'erro: ' + error});
+
     }
 
 });

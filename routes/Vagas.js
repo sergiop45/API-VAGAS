@@ -1,5 +1,6 @@
 const route = require('express').Router();
 const ModelVaga = require('../src/app/model/modelVaga');
+const VerifyJwt = require('./VerifyJwt');
 
 //POST
 
@@ -13,7 +14,7 @@ const ModelVaga = require('../src/app/model/modelVaga');
 }
 */
 
-route.post('/vaga', async (req, res) => {
+route.post('/vaga', VerifyJwt, async (req, res) => {
 
     const vaga = req.body;
 
@@ -21,7 +22,7 @@ route.post('/vaga', async (req, res) => {
     .then(() => {
         res.status(201).json({message: 'Vaga registrada com sucesso!'});
     })
-    .catch((erro) => console.log('erro: '+ erro));
+    .catch((erro) => res.status(500).json({message: 'erro: ' + erro}));
 
 });
 
@@ -72,7 +73,7 @@ route.get('/vaga/:id', async (req, res) => {
 
 //DELETE 
 
-route.delete('/vaga/:id', async (req, res) => {
+route.delete('/vaga/:id', VerifyJwt, async (req, res) => {
 
     const id = req.params.id;
 
@@ -101,7 +102,7 @@ route.delete('/vaga/:id', async (req, res) => {
 
 //UPDATE
 
-route.patch('/vaga/:id', async (req, res) => {
+route.patch('/vaga/:id', VerifyJwt, async (req, res) => {
 
     try {
         
