@@ -14,7 +14,7 @@ const VerifyJwt = require('./VerifyJwt');
 }
 */
 
-route.post('/vaga', VerifyJwt, async (req, res) => {
+route.post('/vaga', async (req, res) => {
 
     const vaga = req.body;
 

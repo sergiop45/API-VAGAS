@@ -6,8 +6,11 @@ const UserController = require('./routes/Usuarios');
 const LoginController = require('./routes/Login');
 const conn = require('./src/database/connection');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 require('dotenv-safe').config();
 
+
+app.use(cors());
 app.use(express.urlencoded({
     extended: true
 }));
